@@ -1,0 +1,3 @@
+rootProject.name = 'annotations_and_reflection'
+include 'myspringboot'
+

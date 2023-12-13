@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'com.example'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.reflections:reflections:0.10.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
+}
+
+test {
+    useJUnitPlatform()
+}
