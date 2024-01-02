@@ -15,8 +15,6 @@ repositories {
 
 dependencies {
 	implementation project(':myspringboot')
-
-	implementation 'org.reflections:reflections:0.10.2'
 }
 
 tasks.named('test') {
