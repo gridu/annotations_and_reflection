@@ -14,8 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@MyCustomAnnotation()//value = "new value"}}}}
+@MyCustomAnnotation()//value = "new value")
 @RequestMapping(url = "/v1/users")
+//@Scope(ClassScope.REQUEST)
 public class TestController {
 
     @GetMapping(path = "/get")

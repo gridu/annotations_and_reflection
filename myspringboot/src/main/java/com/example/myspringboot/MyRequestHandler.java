@@ -67,8 +67,7 @@ public class MyRequestHandler implements HttpHandler {
             // if method is not void means, we need to return data to the client
             if(target.getReturnType().getSimpleName() != Constants.VOID) {
                 // invoke the controller method and receive the response
-                objectResponse = executeRequest(instance, requestParam);
-                //objectResponse = target.invoke(instance, requestParam);
+                objectResponse = executeRequest(requestParam);
 
                 // serialize the response
                 String jsonObject = serializeObject(objectResponse);
@@ -83,10 +82,9 @@ public class MyRequestHandler implements HttpHandler {
                 }
             } else {
                 // if method from controller do not contain a response, return a generic message
-                //target.invoke(instance, requestParam);
-                executeRequest(instance, requestParam);
+                executeRequest(requestParam);
 
-                // Si el método no devuelve un valor, solo envía una respuesta de éxito
+                // generic message
                 String response = "Method executed successfully";
                 exchange.sendResponseHeaders(200, response.length());
                 try (OutputStream os = exchange.getResponseBody()) {
@@ -99,13 +97,13 @@ public class MyRequestHandler implements HttpHandler {
         }
     }
 
-    public Object executeRequest(Object instance, Object[] requestParam) throws InvocationTargetException, IllegalAccessException {
-        Object responseObject = target.invoke(instance, requestParam);
+    public Object executeRequest(Object[] requestParam) throws InvocationTargetException, IllegalAccessException {
+        Object responseObject = this.target.invoke(instance, requestParam);
 
-        if(scope.equals(ClassScope.PROTOTYPE)) {
+        if(scope.equals(ClassScope.REQUEST)) {
             try {
-                this.instance = instance.getClass().getDeclaredConstructor().newInstance();
-                System.out.println(ClassScope.PROTOTYPE + ":Creating new instance for each request");
+                this.instance = this.instance.getClass().getDeclaredConstructor().newInstance();
+                System.out.println(ClassScope.REQUEST + ":Creating new instance for each request");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

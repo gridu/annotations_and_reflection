@@ -6,14 +6,12 @@ import com.example.myspringannotations.Port;
 import com.example.myspringannotations.SpringBootApplication;
 import com.example.myspringboot.SpringApplication;
 
-import java.io.IOException;
-
 @SpringBootApplication
 @Port(port = 8083)
 public class DemoApplication {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		String annotationValue = TestController.class.getAnnotation(MyCustomAnnotation.class).value();
-		System.out.println(annotationValue);
+		System.out.println("---> " + annotationValue);
 
 		SpringApplication.runApp(DemoApplication.class, args);
 	}

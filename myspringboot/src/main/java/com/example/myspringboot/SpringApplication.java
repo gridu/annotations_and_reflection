@@ -43,7 +43,7 @@ public class SpringApplication {
      * @param args
      * @throws IOException
      */
-    public static void runApp(Class<?> mainClass, String[] args) throws IOException {
+    public static void runApp(Class<?> mainClass, String[] args) {
         String packagePath = null;
         int port;
 
@@ -72,7 +72,11 @@ public class SpringApplication {
         Set<Class<?>> clazzes = getClassesWithAnnotation(packagePath, RequestMapping.class);
 
         // create server
-        myHttpServer = new MyHttpServer(port);
+        try {
+            myHttpServer = new MyHttpServer(port);
+        } catch (IOException e) {
+            throw new RuntimeException("Error while creating server: " + e);
+        }
 
         // search for controller classes and add the request handlers to the server.
         extractHttpHandlers(clazzes);
@@ -123,7 +127,7 @@ public class SpringApplication {
             }
 
             // get all the request handlers from current class, those handlers will listen HTTP request calls for each controller method
-            Set<MyRequestHandler> myHandlers = getMethodsWithAnnotation(clazz, instance);//, scope);
+            Set<MyRequestHandler> myHandlers = getMethodsWithAnnotation(clazz, instance);
 
             if (myHandlers!= null && !myHandlers.isEmpty()) {
                 RequestMapping classRequestPath = clazz.getAnnotation(RequestMapping.class);
