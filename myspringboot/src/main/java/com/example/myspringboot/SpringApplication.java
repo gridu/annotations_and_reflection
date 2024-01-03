@@ -182,9 +182,9 @@ public class SpringApplication {
 
                 String annotationName = annotation.annotationType().getSimpleName();
                 // If current annotation is for Post, Put or Get, then create a new request handler
-                if(Constants.httpAnnotations.get(annotationName) != null) {
+                if(Constants.HTTP_REQUEST_TYPES.get(annotationName) != null) {
                     //System.out.println("----> Method inside class contains the annotation: " + annotation.toString());
-                    String requestType = Constants.httpAnnotationsType.get(annotationName);
+                    String requestType = Constants.HTTP_REQUEST_TYPES.get(annotationName);
 
                     /* The new request handler will contain the params:
                         --> instance: we can use this class with to call ir manipulate the methods inside this controller.

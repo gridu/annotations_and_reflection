@@ -1,26 +1,19 @@
 package com.example.util;
 
-import com.example.myspringannotations.GetMapping;
-import com.example.myspringannotations.PostMapping;
-import com.example.myspringannotations.PutMapping;
-
-import java.lang.annotation.Annotation;
 import java.util.HashMap;
 
 public class Constants {
-    public final static HashMap<String, Class<? extends Annotation>> httpAnnotations;
-    public final static HashMap<String, String> httpAnnotationsType;
+    public final static HashMap<String, String> HTTP_REQUEST_TYPES;
+
+    public final static String GET_MAPPING = "GetMapping";
+    public final static String POST_MAPPING = "PostMapping";
+    public final static String PUT_MAPPING = "PutMapping";
 
     static {
-        httpAnnotations = new HashMap<>();
-        httpAnnotations.put("GetMapping", GetMapping.class);
-        httpAnnotations.put("PostMapping", PostMapping.class);
-        httpAnnotations.put("PutMapping", PutMapping.class);
-
-        httpAnnotationsType = new HashMap<>();
-        httpAnnotationsType.put("GetMapping", "GET");
-        httpAnnotationsType.put("PostMapping", "POST");
-        httpAnnotationsType.put("PutMapping", "PUT");
+        HTTP_REQUEST_TYPES = new HashMap<>();
+        HTTP_REQUEST_TYPES.put(GET_MAPPING, "GET");
+        HTTP_REQUEST_TYPES.put(POST_MAPPING, "POST");
+        HTTP_REQUEST_TYPES.put(PUT_MAPPING, "PUT");
     }
 
     // http request constants
@@ -29,7 +22,7 @@ public class Constants {
     public final static String REQUEST_BODY = "RequestBody";
     public final static String REQUEST_PARAM = "RequestParam";
 
-    // clazz constants
+    // regular constants
     public final static String MAIN = "main";
     public final static String VOID = "void";
     public final static String AND = "&";
